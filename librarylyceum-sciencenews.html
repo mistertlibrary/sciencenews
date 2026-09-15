@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>News vs. Information vs. Research | WEHS Library Lyceum</title>
+
+  <meta name="description" content="Distinguish news articles, informational websites, and scholarly articles from one another; background information on churnalism in science reporting.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="WEHS Library Lyceum">
+  <meta property="og:title" content="News vs. Information vs. Research | WEHS Library Lyceum">
+  <meta property="og:description" content="Distinguish news articles, informational websites, and scholarly articles from one another; background information on churnalism in science reporting.">
+  <meta property="og:url" content="https://mistertlibrary.github.io/librarylyceum/sciencenews.html">
+  <meta property="og:image" content="https://mistertlibrary.github.io/librarylyceum/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="News vs. Information vs. Research | WEHS Library Lyceum">
+  <meta name="twitter:description" content="Distinguish news articles, informational websites, and scholarly articles from one another; background information on churnalism in science reporting.">
+  <meta name="twitter:image" content="https://mistertlibrary.github.io/librarylyceum/og-image.png">
+
+  <!-- lyceum:head -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+
+  <script>
+    /* Reader preferences, applied before first paint. Keep inline, in the head. */
+    (function () {
+      try {
+        var d = document.documentElement;
+        var t = localStorage.getItem("lyceum-theme");
+        var s = localStorage.getItem("lyceum-size");
+        var f = localStorage.getItem("lyceum-font");
+        if (t === "dark" || t === "contrast") d.dataset.theme = t;
+        if (s && s !== "small") d.dataset.size = s;
+        if (f && f !== "serif") d.dataset.font = f;
+        if (f === "dyslexic") {
+          var L = document.createElement("link");
+          L.id = "lyceum-dyslexic"; L.rel = "stylesheet"; L.href = "/librarylyceum/lyceum-dyslexic.css";
+          document.head.appendChild(L);
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="stylesheet" href="/librarylyceum/lyceum-fonts.css">
+  <link rel="stylesheet" href="lyceum.css">
+  <!-- /lyceum:head -->
+
+  <style>
+
+    /* ── GUIDE PAGE ONLY ── */
+
+    .page-rule { margin: 1.2rem auto 0; }
+
+    .guide-body {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 4rem 2.5rem 5rem;
+      animation: fadeUp 0.7s 0.1s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    .guide-section { margin-bottom: 3.5rem; }
+    .guide-section:last-of-type { margin-bottom: 0; }
+
+    .section-label {
+      font-family: var(--sans);
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red-ink);
+      margin-bottom: 0.9rem;
+      text-align: center;
+    }
+
+    .section-title {
+      font-family: var(--display);
+      font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: 0.03em;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .section-rule { width: 40px; height: 1px; background: var(--gold); margin: 0 auto 2rem; }
+
+    .section-body p {
+      font-family: var(--body-font);
+      font-size: var(--base-size);
+      color: var(--text);
+      line-height: 1.9;
+      margin-bottom: 1.4rem;
+      text-align: center;
+    }
+
+    .section-body p:last-child { margin-bottom: 0; }
+
+    .section-divider { width: 100%; height: 1px; background: var(--border); margin: 3.5rem 0; }
+
+    .subhead {
+      font-family: var(--display);
+      font-size: calc(var(--base-size) * 1.25);
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: 0.02em;
+      text-align: center;
+      margin: 2.4rem 0 1rem;
+    }
+
+    /* ── STANDFIRST ── */
+
+    .standfirst {
+      background-color: var(--surface);
+      border-top: 1px solid var(--gold);
+      border-bottom: 1px solid var(--gold);
+      padding: 2rem 2.5rem;
+      margin: 0 0 2.5rem;
+      text-align: center;
+      transition: background-color 0.3s;
+    }
+
+    .standfirst p {
+      font-family: var(--body-font);
+      font-size: calc(var(--base-size) * 1.05);
+      line-height: 1.9;
+      margin-bottom: 1rem;
+    }
+
+    .standfirst p:last-child { margin-bottom: 0; }
+
+    /* ── THE THREE KINDS ── */
+
+    .kinds {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1px;
+      background-color: var(--border);
+      margin: 2rem 0;
+    }
+
+    .kind {
+      background-color: var(--surface);
+      padding: 1.8rem 1.6rem;
+      transition: background-color 0.3s;
+    }
+
+    .kind h3 {
+      font-family: var(--display);
+      font-size: calc(var(--base-size) * 1.2);
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: 0.02em;
+      text-align: center;
+      padding-bottom: 0.7rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--gold);
+    }
+
+    .kind p { line-height: 1.8; margin-bottom: 1rem; }
+
+    .kind-label {
+      display: block;
+      font-family: var(--sans);
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-ink);
+      text-align: center;
+      margin-bottom: 0.6rem;
+    }
+
+    .kind ul { list-style: none; padding: 0; margin: 0; }
+
+    .kind li {
+      position: relative;
+      padding-left: 1.1rem;
+      margin-bottom: 0.6rem;
+      line-height: 1.7;
+    }
+
+    .kind li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.72em;
+      width: 5px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .kind-example {
+      margin: 1.2rem 0 0;
+      padding-top: 0.9rem;
+      border-top: 1px solid var(--border);
+      font-size: calc(var(--base-size) * 0.92);
+    }
+
+    .kind-example-label {
+      display: block;
+      font-family: var(--sans);
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-ink);
+      margin-bottom: 0.3rem;
+    }
+
+    .kind-example a { text-decoration: none; }
+    .kind-example a:hover { text-decoration: underline; }
+    .kind-example cite { font-style: italic; }
+
+    /* ── CAUTION ── */
+
+    .caution {
+      background-color: var(--surface);
+      border-left: 3px solid var(--red-ink);
+      padding: 1.8rem 2rem;
+      margin: 2rem 0;
+      transition: background-color 0.3s;
+    }
+
+    .caution ul { list-style: none; padding: 0; margin: 1rem 0 0; }
+
+    .caution li {
+      position: relative;
+      padding-left: 1.2rem;
+      margin-bottom: 0.7rem;
+      line-height: 1.8;
+    }
+
+    .caution li:last-child { margin-bottom: 0; }
+
+    .caution li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.75em;
+      width: 6px;
+      height: 1px;
+      background: var(--red-ink);
+    }
+
+    /* ── SORTING ACTIVITY ── */
+
+    .activity {
+      border-top: 1px solid var(--gold);
+      border-bottom: 1px solid var(--gold);
+      padding: 2rem 0 2.4rem;
+      margin: 2rem 0;
+    }
+
+    .activity-instructions { margin-bottom: 1.6rem; }
+
+    .pool-label, .bin-label {
+      font-family: var(--sans);
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-ink);
+      text-align: center;
+      margin-bottom: 0.8rem;
+    }
+
+    .source-list { list-style: none; padding: 0; margin: 0; }
+
+    .source-list li { margin-bottom: 0.7rem; }
+
+    .source {
+      font-family: var(--body-font);
+      font-size: calc(var(--base-size) * 0.88);
+      line-height: 1.7;
+      color: var(--text);
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--border);
+      padding: 0.9rem 1rem;
+      transition: border-color 0.2s, background-color 0.2s;
+    }
+
+    .source:hover { border-left-color: var(--gold); }
+
+    .source.chosen {
+      border-color: var(--gold);
+      border-left-color: var(--gold);
+      background-color: var(--bg);
+    }
+
+    .source.dragging { opacity: 0.5; }
+
+    .source p { margin: 0; }
+
+    .source a { overflow-wrap: anywhere; }
+
+    .source cite { font-style: italic; }
+
+    .source-select {
+      font-family: var(--sans);
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text);
+      background: none;
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.9rem;
+      margin-top: 0.7rem;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .source-select:hover { border-color: var(--gold); color: var(--gold-ink); }
+    .source-select[aria-pressed="true"] { border-color: var(--gold); color: var(--gold-ink); }
+
+    .source-note {
+      display: block;
+      font-family: var(--sans);
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-top: 0.6rem;
+    }
+
+    .source[data-verdict="right"] { border-left-color: var(--ok); }
+    .source[data-verdict="right"] .source-note { color: var(--ok); }
+    .source[data-verdict="wrong"] { border-left-color: var(--red-ink); }
+    .source[data-verdict="wrong"] .source-note { color: var(--red-ink); }
+
+    .bins {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1.2rem;
+      margin-top: 1.8rem;
+    }
+
+    .bin {
+      background-color: var(--surface);
+      border: 1px dashed var(--border);
+      padding: 1.2rem 1rem;
+      transition: border-color 0.2s, background-color 0.3s;
+    }
+
+    .bin.armed, .bin.over { border-color: var(--gold); border-style: solid; }
+
+    .bin h3 {
+      font-family: var(--display);
+      font-size: calc(var(--base-size) * 1.05);
+      font-weight: 600;
+      text-align: center;
+      color: var(--text);
+      margin-bottom: 0.8rem;
+    }
+
+    .bins .source { font-size: calc(var(--base-size) * 0.82); }
+
+    .bin-place {
+      display: block;
+      width: 100%;
+      font-family: var(--sans);
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text);
+      background: none;
+      border: 1px solid var(--border);
+      padding: 0.5rem;
+      margin-bottom: 0.9rem;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .bin-place:hover { border-color: var(--gold); color: var(--gold-ink); }
+    .bin-place[disabled] { opacity: 0.45; cursor: default; }
+    .bin-place[disabled]:hover { border-color: var(--border); color: var(--text); }
+
+    .activity-actions {
+      display: flex;
+      gap: 0.8rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 1.8rem;
+    }
+
+    .activity-btn {
+      font-family: var(--sans);
+      font-size: 0.64rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text);
+      background: none;
+      border: 1px solid var(--border);
+      padding: 0.7rem 1.4rem;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .activity-btn:hover { border-color: var(--gold); color: var(--gold-ink); }
+
+    .activity-status {
+      font-family: var(--body-font);
+      font-size: calc(var(--base-size) * 0.9);
+      text-align: center;
+      line-height: 1.8;
+      margin-top: 1.4rem;
+      min-height: 1.8em;
+    }
+
+    .activity-empty {
+      font-family: var(--sans);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 0.6rem 0;
+    }
+
+    /* ── FEATURED DATABASE ── */
+
+    .headline-db {
+      background-color: var(--red);
+      color: var(--on-red);
+      border: 1px solid var(--gold);
+      padding: 2.2rem 2.4rem 2rem;
+      margin: 2.4rem 0 0;
+    }
+
+    .headline-db-label {
+      font-family: var(--sans);
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      text-align: center;
+      margin: 0 0 1rem;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid var(--on-red);
+    }
+
+    .headline-db h3 {
+      font-family: var(--display);
+      font-size: clamp(2rem, 6vw, 3.1rem);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      line-height: 1.1;
+      text-align: center;
+      color: var(--on-red);
+      margin: 0 0 1.2rem;
+    }
+
+    .headline-db p {
+      font-family: var(--body-font);
+      font-size: calc(var(--base-size) * 0.98);
+      line-height: 1.85;
+      text-align: center;
+      margin: 0 0 1.1rem;
+    }
+
+    .headline-db p:last-of-type { margin-bottom: 1.6rem; }
+
+    .headline-db-go { text-align: center; margin: 0; }
+
+    .headline-db-go a {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--on-red);
+      text-decoration: none;
+      border: 1px solid var(--on-red);
+      padding: 0.8rem 1.8rem;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .headline-db-go a:hover,
+    .headline-db-go a:focus-visible {
+      background-color: var(--on-red);
+      color: var(--red);
+    }
+
+    .headline-db a:focus-visible { outline: 2px solid var(--on-red); outline-offset: 3px; }
+
+    /* ── SOURCE LISTS ── */
+
+    .outlets { list-style: none; padding: 0; margin: 2rem 0 0; }
+
+    .outlet {
+      border-bottom: 1px solid var(--border);
+      padding: 1.3rem 0;
+    }
+
+    .outlet:first-child { border-top: 1px solid var(--border); }
+
+    .outlet-name {
+      font-family: var(--display);
+      font-size: calc(var(--base-size) * 1.12);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.4rem;
+    }
+
+    .outlet-name a { text-decoration: none; }
+    .outlet-name a:hover { text-decoration: underline; }
+    .outlet-name cite { font-style: italic; }
+
+    .outlet p {
+      font-size: calc(var(--base-size) * 0.92);
+      line-height: 1.8;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .outlet p cite { font-style: italic; }
+
+    .ext {
+      display: inline-block;
+      width: 0.62em;
+      height: 0.62em;
+      margin-left: 0.35em;
+      vertical-align: baseline;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
+    /* ── WORKSHEET ── */
+
+    .worksheet { margin: 2rem 0 0; }
+
+    .three-c {
+      border-top: 1px solid var(--gold);
+      padding: 1.6rem 0 1.8rem;
+    }
+
+    .three-c:last-of-type { border-bottom: 1px solid var(--gold); }
+
+    .three-c h3 {
+      font-family: var(--sans);
+      font-size: 0.66rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold-ink);
+      text-align: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .three-c-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 1.6rem;
+      align-items: start;
+    }
+
+    .c-questions {
+      margin: 0;
+      line-height: 1.85;
+      font-size: calc(var(--base-size) * 0.92);
+      border-left: 1px solid var(--gold);
+      padding-left: 1.1rem;
+    }
+
+    .c-notes label {
+      display: block;
+      font-family: var(--sans);
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .c-notes textarea {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      min-height: 9rem;
+      font-family: var(--body-font);
+      font-size: calc(var(--base-size) * 0.92);
+      line-height: 1.8;
+      color: var(--text);
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.8rem 0.9rem;
+      resize: vertical;
+      transition: border-color 0.2s, background-color 0.3s;
+    }
+
+    .c-notes textarea:focus { border-color: var(--gold); }
+
+    /* ── CHURNALISM ── */
+
+    .qa { margin-top: 2.4rem; }
+
+    .qa ul { list-style: none; padding: 0; margin: 1rem 0 0; }
+
+    .qa li {
+      position: relative;
+      padding-left: 1.2rem;
+      margin-bottom: 0.9rem;
+      line-height: 1.85;
+    }
+
+    .qa li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.85em;
+      width: 6px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    /* ── PAGE TOKENS ── */
+
+    .guide-body { --ok: #1F6B3A; }
+    [data-theme="dark"] .guide-body { --ok: #7BC48F; }
+    [data-theme="contrast"] .guide-body { --ok: #FFD400; }
+
+    @media print {
+      .activity-actions, .bin-place { display: none !important; }
+      .bin { border-style: solid; }
+      .three-c { break-inside: avoid; page-break-inside: avoid; }
+      .headline-db { background: transparent; color: #000000; border: 2px solid #000000; break-inside: avoid; page-break-inside: avoid; }
+      .headline-db h3, .headline-db-go a { color: #000000; }
+      .headline-db-label, .headline-db-go a { border-color: #000000; }
+      .c-notes textarea { background: transparent; border-color: #767676; min-height: 7rem; }
+    }
+
+    @media (max-width: 640px) {
+      .guide-body { padding: 2.5rem 1.25rem 4rem; }
+      .standfirst { padding: 1.5rem 1.25rem; }
+      .kind { padding: 1.4rem 1.2rem; }
+      .caution { padding: 1.4rem 1.25rem; }
+      .three-c-body { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+      .headline-db { padding: 1.6rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- lyceum:skiplink target="#main-content" -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <!-- /lyceum:skiplink -->
+
+  <!-- lyceum:a11y -->
+  <button id="a11y-trigger" class="a11y-trigger" type="button"
+          aria-expanded="false" aria-controls="a11y-panel"
+          aria-label="Display and accessibility settings">
+    <span class="a11y-trigger-glyph" aria-hidden="true">Aa</span>
+  </button>
+
+  <div id="a11y-panel" class="a11y-panel" role="group" aria-labelledby="a11y-panel-title" hidden>
+    <p class="a11y-panel-title" id="a11y-panel-title">Display Settings</p>
+
+    <div class="a11y-group">
+      <span class="a11y-label" id="a11y-size-label">Text size</span>
+      <div class="a11y-row" role="group" aria-labelledby="a11y-size-label">
+        <button class="a11y-btn active" type="button" data-size="small" aria-pressed="true">A</button>
+        <button class="a11y-btn" type="button" data-size="medium" aria-pressed="false">A+</button>
+        <button class="a11y-btn" type="button" data-size="large"  aria-pressed="false">A++</button>
+      </div>
+    </div>
+
+    <div class="a11y-group">
+      <span class="a11y-label" id="a11y-font-label">Typeface</span>
+      <div class="a11y-row" role="group" aria-labelledby="a11y-font-label">
+        <button class="a11y-btn active" type="button" data-font="serif" aria-pressed="true">Serif</button>
+        <button class="a11y-btn" type="button" data-font="sans" aria-pressed="false">Sans</button>
+        <button class="a11y-btn" type="button" data-font="dyslexic" aria-pressed="false" aria-label="OpenDyslexic">Dyslexic</button>
+      </div>
+    </div>
+
+    <div class="a11y-group">
+      <span class="a11y-label" id="a11y-theme-label">Theme</span>
+      <div class="a11y-row" role="group" aria-labelledby="a11y-theme-label">
+        <button class="a11y-btn active" type="button" data-theme-choice="light" aria-pressed="true">Light</button>
+        <button class="a11y-btn" type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
+        <button class="a11y-btn" type="button" data-theme-choice="contrast" aria-pressed="false">Contrast</button>
+      </div>
+    </div>
+  </div>
+  <!-- /lyceum:a11y -->
+  <!-- lyceum:header page="guides" -->
+  <header>
+    <a href="index.html" class="header-brand" aria-label="WEHS Library Lyceum home">
+      <div class="header-wordmark">
+        <span class="wordmark-school">West Essex High School</span>
+        <span class="wordmark-name">Library Lyceum</span>
+      </div>
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="databases.html">Find a Database</a>
+      <a href="guides.html" class="active" aria-current="page">Research Guides</a>
+      <a href="tools.html">Classroom Tools</a>
+      <a href="search.html">Search</a>
+      <a href="newsletter/">Newsletter</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+  <!-- /lyceum:header -->
+
+  <main id="main-content">
+
+    <div class="page-header">
+      <h1>News vs. Information vs. Research</h1>
+      <div class="page-rule" aria-hidden="true"></div>
+    </div>
+
+    <div class="guide-body">
+
+      <section class="guide-section" aria-labelledby="kinds-title">
+        <p class="section-label">Nice Distinctions</p>
+        <h2 class="section-title" id="kinds-title">Same Scientific Content, Three Unique Formats!</h2>
+        <div class="section-rule" aria-hidden="true"></div>
+
+        <div class="standfirst" role="note">
+          <p><strong>For your current events assignment, you need a NEWS ARTICLE, not an informational website.</strong></p>
+          <p>This guide will help you distinguish between news reporting, informational websites, and scholarly research.</p>
+        </div>
+
+        <div class="kinds">
+          <div class="kind">
+            <h3>News Article</h3>
+            <p><strong>What it is:</strong> Reporting on recent events written by journalists for the general public</p>
+            <span class="kind-label">Look for:</span>
+            <ul>
+              <li>Reporter&rsquo;s byline (author name)</li>
+              <li>Current date (within days/weeks of today)</li>
+              <li>News publication name (<cite>NYT</cite>, <cite>BBC</cite>, local paper, etc.)</li>
+              <li>Quotes from experts or witnesses</li>
+              <li>Information about a recent event</li>
+            </ul>
+          </div>
+
+          <div class="kind">
+            <h3>Informational Website</h3>
+            <p><strong>What it is:</strong> Background information, guide, fact sheet, or advocacy content</p>
+            <span class="kind-label">Look for:</span>
+            <ul>
+              <li>No author name</li>
+              <li>Undated (or outdated)</li>
+              <li>Lack of publication name</li>
+              <li>No quotes</li>
+              <li>General background info</li>
+              <li>Reference works belong here, too. An encyclopedia entry may contain an author, a date, and a publisher, but it still qualifies as background information. The source is intended as an introduction to basic information, not analysis or particulars about an event.</li>
+            </ul>
+            <p class="kind-example"><span class="kind-example-label">Example</span> <a href="https://plato.stanford.edu/" target="_blank" rel="noopener"><cite>Stanford Encyclopedia of Philosophy</cite><svg class="ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4L10 14M18 14v6H4V6h6"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p>
+          </div>
+
+          <div class="kind">
+            <h3>Scholarly Article</h3>
+            <p><strong>What it is:</strong> Peer-reviewed research published in academic journals</p>
+            <span class="kind-label">Look for:</span>
+            <ul>
+              <li>Multiple authors with institutional affiliations</li>
+              <li>Journal name</li>
+              <li>Content organized into sections such as abstract, methods, references</li>
+              <li>Technical language</li>
+              <li>Research findings or data</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="caution">
+          <h3 class="subhead" style="margin-top:0;">Beware!</h3>
+          <p style="text-align:center;">It probably <strong>isn&rsquo;t</strong> news if&hellip;</p>
+          <ul>
+            <li>&hellip;the article is undated or outdated (older than a few months).</li>
+            <li>&hellip;there&rsquo;s no byline or attribution (no author).</li>
+            <li>&hellip;most of the writing provides background information (no recent event).</li>
+            <li>&hellip;the content is labeled as a guide, fact sheet, or brochure (that&rsquo;s an informational website).</li>
+            <li>&hellip;the format includes sections like an abstract, methods section, or long bibliography (that&rsquo;s a scholarly article).</li>
+            <li>&hellip;the content is a reference work such as an encyclopedia or handbook, even if it&rsquo;s signed and dated. Background information is just that: information.</li>
+          </ul>
+        </div>
+      </section>
+
+      <div class="section-divider" aria-hidden="true"></div>
+
+      <section class="guide-section" aria-labelledby="activity-title">
+        <p class="section-label">Practice Round</p>
+        <h2 class="section-title" id="activity-title">Test Your Knowledge!</h2>
+        <div class="section-rule" aria-hidden="true"></div>
+
+        <div class="section-body activity-instructions">
+          <p>Sort each citation into the correct category. It&rsquo;s OK to actually click the links if you aren&rsquo;t sure!</p>
+          <p style="font-size:calc(var(--base-size) * 0.88);">Choose a citation, then choose a category. You can also drag the cards.</p>
+        </div>
+
+        <div class="activity" id="activity">
+
+          <p class="pool-label" id="pool-label">Citations</p>
+          <div class="bin" data-bin="pool">
+            <button class="bin-place" type="button" data-place="pool" disabled>Return here</button>
+            <ul class="source-list" id="pool" aria-labelledby="pool-label"></ul>
+            <p class="activity-empty">You have placed all five citations</p>
+          </div>
+
+          <div class="bins">
+            <div class="bin" data-bin="news">
+              <h3 id="bin-news-label">News</h3>
+              <button class="bin-place" type="button" data-place="news" disabled>Place here</button>
+              <ul class="source-list" aria-labelledby="bin-news-label"></ul>
+              <p class="activity-empty">Empty</p>
+            </div>
+
+            <div class="bin" data-bin="informational">
+              <h3 id="bin-info-label">Information</h3>
+              <button class="bin-place" type="button" data-place="informational" disabled>Place here</button>
+              <ul class="source-list" aria-labelledby="bin-info-label"></ul>
+              <p class="activity-empty">Empty</p>
+            </div>
+
+            <div class="bin" data-bin="scholarly">
+              <h3 id="bin-schol-label">Scholarly</h3>
+              <button class="bin-place" type="button" data-place="scholarly" disabled>Place here</button>
+              <ul class="source-list" aria-labelledby="bin-schol-label"></ul>
+              <p class="activity-empty">Empty</p>
+            </div>
+          </div>
+
+          <div class="activity-actions">
+            <button class="activity-btn" type="button" id="check-answers">Check my answers</button>
+            <button class="activity-btn" type="button" id="reset-activity">Start over</button>
+          </div>
+
+          <p class="activity-status" id="activity-status" role="status" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <div class="section-divider" aria-hidden="true"></div>
+
+      <section class="guide-section" aria-labelledby="outlets-title">
+        <p class="section-label">Where to Look</p>
+        <h2 class="section-title" id="outlets-title">Science News Sources</h2>
+        <div class="section-rule" aria-hidden="true"></div>
+
+        <div class="section-body">
+          <p>Seeking science news? Try one of these outlets!</p>
+        </div>
+
+        <div class="headline-db">
+          <p class="headline-db-label">Start here</p>
+          <h3>Today&rsquo;s Science</h3>
+          <p>This database offers more than 6,000 easy-to-read articles on major scientific developments across STEM fields, supported by videos, images, diagrams, and charts. Its 12 curated Topic Centers organize subjects into detailed, hyperlinked subtopics, while Conversations with Scientists provide firsthand perspectives on discoveries, research ideas, and science careers. With over 18,000 visuals and regularly updated science news video briefs, the resource supports engaging research, teaching, and learning.</p>
+          <p>In short, Today&rsquo;s Science connects what you&rsquo;re learning in the classroom to the bleeding edge of scientific advancement and discovery.</p>
+          <p class="headline-db-go"><a href="https://online.infobaselearning.com/Direct.aspx?pid=WE59&amp;aid=17282" target="_blank" rel="noopener">Open the database<svg class="ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4L10 14M18 14v6H4V6h6"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p>
+        </div>
+
+        <ul class="outlets">
+          <li class="outlet">
+            <p class="outlet-name"><a href="https://arstechnica.com/science/" target="_blank" rel="noopener"><cite>Ars Technica</cite><svg class="ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4L10 14M18 14v6H4V6h6"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p>
+            <p>News and reviews covering IT, AI, science, space, health, gaming, cybersecurity, tech policy, computers, mobile devices, and operating systems.</p>
+          </li>
+
+          <li class="outlet">
+            <p class="outlet-name"><a href="https://www.bbc.com/news/science_and_environment" target="_blank" rel="noopener"><cite>BBC News</cite><svg class="ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4L10 14M18 14v6H4V6h6"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p>
+            <p>Science and environmental news from the British Broadcasting Corporation.</p>
+          </li>
+
+          <li class="outlet">
+            <p class="outlet-name"><a href="https://www.eurekalert.org" target="_blank" rel="noopener">EurekAlert!<svg class="ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4L10 14M18 14v6H4V6h6"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p>
+            <p>EurekAlert! hosts news releases produced by universities, journal publishers, medical centers, government agencies, corporations, and other organizations engaged in all disciplines of scientific research. These news releases may describe research findings recently published in peer-reviewed journals, timely information related to the business, innovation, and societal aspects of science, and details of grants, awards and honors, books, and scientific meetings.</p>
+          </li>
+
+          <li class="outlet">
+            <p class="outlet-name"><a href="https://www.nationalgeographic.com/science" target="_blank" rel="noopener"><cite>National Geographic</cite><svg class="ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4L10 14M18 14v6H4V6h6"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p>
+            <p>Explore the intersection of science, environment, and health with coverage ranging from climate change and biodiversity to human health and scientific discoveries.</p>
+          </li>
+
+          <li class="outlet">
+            <p class="outlet-name"><a href="https://www.newscientist.com/section/news/" target="_blank" rel="noopener"><cite>New Scientist</cite><svg class="ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4L10 14M18 14v6H4V6h6"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p>
+            <p>Articles and expert analysis on the newest developments in space, physics, health, technology, the environment and more from the world&rsquo;s most popular weekly science and technology publication.</p>
+          </li>
+
+          <li class="outlet">
+            <p class="outlet-name"><a href="https://www.nytimes.com/section/science" target="_blank" rel="noopener"><cite>The New York Times</cite><svg class="ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4L10 14M18 14v6H4V6h6"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p>
+            <p>The latest science news and developments about space, animal behavior, plant life, the brain, genetics, archaeology, robots, and climate change from <cite>The New York Times</cite>.</p>
+          </li>
+
+          <li class="outlet">
+            <p class="outlet-name"><a href="https://www.npr.org/sections/science/" target="_blank" rel="noopener"><cite>NPR</cite><svg class="ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4L10 14M18 14v6H4V6h6"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p>
+            <p>The latest health and science news, including updates on medicine, healthy living, nutrition, drugs, diet, and advances in science and technology.</p>
+          </li>
+
+          <li class="outlet">
+            <p class="outlet-name"><a href="https://www.quantamagazine.org/" target="_blank" rel="noopener"><cite>Quanta</cite><svg class="ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4L10 14M18 14v6H4V6h6"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p>
+            <p>Illuminating basic science and math research through public-service journalism.</p>
+          </li>
+
+          <li class="outlet">
+            <p class="outlet-name"><a href="https://www.scientificamerican.com/" target="_blank" rel="noopener"><cite>Scientific American</cite><svg class="ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4L10 14M18 14v6H4V6h6"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p>
+            <p>The essential guide to the most important and exciting research, ideas, and knowledge in science, health, technology, the environment, and society.</p>
+          </li>
+
+          <li class="outlet">
+            <p class="outlet-name"><a href="https://www.wsj.com/science" target="_blank" rel="noopener"><cite>The Wall Street Journal</cite><svg class="ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4L10 14M18 14v6H4V6h6"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p>
+            <p>The latest science news and investigations across archaeology, space, biology, and astronomy from <cite>The Wall Street Journal</cite>.</p>
+          </li>
+
+          <li class="outlet">
+            <p class="outlet-name"><a href="https://undark.org" target="_blank" rel="noopener"><cite>Undark</cite><svg class="ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4L10 14M18 14v6H4V6h6"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p>
+            <p>Undark is a non-profit, editorially independent magazine covering the complicated and often fractious intersection of science and society.</p>
+          </li>
+        </ul>
+      </section>
+
+      <div class="section-divider" aria-hidden="true"></div>
+
+      <section class="guide-section" aria-labelledby="threecs-title">
+        <h2 class="section-title" id="threecs-title">Thompson&rsquo;s Three Cs for Source Evaluation</h2>
+        <div class="section-rule" aria-hidden="true"></div>
+
+        <div class="section-body">
+          <p>Anytime you use a source, you should evaluate it. You evaluate a source by asking who created it and why; gauging how accurate and current it is; and considering where and how you found it.</p>
+          <p>I encourage my students to use the Three Cs outlined below to ensure their research is reliable, relevant, and strong. Questions like these help you avoid misinformation, support better academic work, and build a foundation for wise decision-making inside and outside of school.</p>
+        </div>
+
+        <div class="worksheet">
+
+          <div class="section-body">
+            <p>Use this framework to quickly evaluate a potential source. Let the questions below guide you, but don&rsquo;t answer all of them!</p>
+          </div>
+
+          <div class="three-c">
+            <h3 id="c-creator-heading">Creator</h3>
+            <div class="three-c-body">
+              <p class="c-questions">Who created this source? Is an author or authorial group identified? What are the creator&rsquo;s academic and/or professional credentials? Are they a recognized expert in their field? Who or what makes them an authority? Is the creator affiliated with institutions or organizations? What other connections are revealed by a cursory search?</p>
+              <div class="c-notes">
+                <label for="c-creator-notes">Notes</label>
+                <textarea id="c-creator-notes"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="three-c">
+            <h3 id="c-content-heading">Content</h3>
+            <div class="three-c-body">
+              <p class="c-questions">Does the content provide ample attributions and citations? Are its sources easy to locate and verify? How does this information square with your prior knowledge about and other sources on the subject? Is it reasonable? How is the material written and organized? Whom is it addressing? What questions does it strive to answer? What positions does it take? When was the content last updated? When was it first created?</p>
+              <div class="c-notes">
+                <label for="c-content-notes">Notes</label>
+                <textarea id="c-content-notes"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="three-c">
+            <h3 id="c-context-heading">Context</h3>
+            <div class="three-c-body">
+              <p class="c-questions">Where, why, how, and by whom was this content disseminated? Who funded its creation? Where and how did you find it? What other materials exist alongside it? Can you locate reviews of the content or its creator? Why does it exist? Whose agenda(s) does it serve?</p>
+              <div class="c-notes">
+                <label for="c-context-notes">Notes</label>
+                <textarea id="c-context-notes"></textarea>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <div class="section-divider" aria-hidden="true"></div>
+
+      <section class="guide-section" aria-labelledby="churnalism-title">
+        <h2 class="section-title" id="churnalism-title">A Note on Churnalism</h2>
+        <div class="section-rule" aria-hidden="true"></div>
+
+        <div class="qa">
+          <h3 class="subhead" style="margin-top:0;">What is churnalism?</h3>
+          <div class="section-body">
+            <p><strong>Churnalism</strong> describes a variety of newswriting in which journalists, staffers, or untrained amateurs repackage third-party materials, such as press releases and wire statements, as news articles.</p>
+            <p>It&rsquo;s also referred to as &ldquo;copy-and-paste journalism.&rdquo;</p>
+            <p><strong>Churnalism is especially common in scientific reporting.</strong></p>
+          </div>
+        </div>
+
+        <div class="qa">
+          <h3 class="subhead">Why is that a problem?</h3>
+          <div class="section-body">
+            <p>These articles&hellip;</p>
+          </div>
+          <ul>
+            <li>&hellip;are often identical to or lightly edited versions of promotional materials.</li>
+            <li>&hellip;do not analyze, interpret, or critically engage with the information they present.</li>
+            <li>&hellip;have undergone little to no fact-checking.</li>
+            <li>&hellip;tend to lack citations and attributions.</li>
+            <li>&hellip;do not incorporate additional research, such as the opinions of other experts or information about current scientific consensus on a subject.</li>
+          </ul>
+        </div>
+
+        <div class="qa">
+          <h3 class="subhead">Why does churnalism abound?</h3>
+          <div class="section-body">
+            <p>Good question! Reasons vary:</p>
+          </div>
+          <ul>
+            <li>Many news outlets shuttered their science sections years ago. Although they don&rsquo;t employ science writers, they still want to publish scientific news.</li>
+            <li>Organizations with declining revenue are desperate for clicks and content. Provocative headlines offer a slick way to spur engagement.</li>
+            <li>In the United States, public relations staff outnumber journalists. Overworked journalists don&rsquo;t have the time or resources to generate original news stories. It&rsquo;s much easier to put a twist on something somebody else already wrote.</li>
+            <li>Individual persons or small groups of people with a passion for a given subject can and do create websites, social media accounts, newsletters, and other forms of media.</li>
+            <li>&ldquo;Entrepreneurs&rdquo; attempt to generate revenue through automated processes, search engine optimization, and social media engagement. &ldquo;Scientific&rdquo; content making bold claims beneath flashy headlines farms engagement.</li>
+          </ul>
+        </div>
+
+        <div class="qa">
+          <h3 class="subhead">Is churnalism necessarily a bad thing?</h3>
+          <div class="section-body">
+            <p>It doesn&rsquo;t have to be! Churnalist articles can be informative and illuminating. That said, it&rsquo;s bad practice to uncritically accept any information, much less scientific knowledge.</p>
+          </div>
+        </div>
+
+        <div class="qa">
+          <h3 class="subhead">How can I identify churnalism?</h3>
+          <div class="section-body">
+            <p>Tell-tale signs of churnalism include:</p>
+          </div>
+          <ul>
+            <li>Headlines clearly intended to trigger an emotional reaction (fear, anger, sadness, etc.)</li>
+            <li>Lack of a byline (no author or date at the top of an article)</li>
+            <li>No context or single-source stories (all the information comes from one study or survey)</li>
+            <li>Extrapolation (article uses a single piece of information to make a larger claim about what&rsquo;s likely or possible)</li>
+            <li>Few citations or attributions</li>
+            <li>One-sided perspective (e.g. only speaking with the authors of a study)</li>
+            <li>Excessive quotations (large portions of the article are in quotes)</li>
+          </ul>
+        </div>
+
+        <div class="qa">
+          <h3 class="subhead">Is it more common in certain places?</h3>
+          <div class="section-body">
+            <p>Often, yes! Sites like <a href="https://www.sciencedaily.com" target="_blank" rel="noopener">ScienceDaily</a> and <a href="https://scienceblog.com" target="_blank" rel="noopener">ScienceBlog</a> are almost entirely churnalism. ScienceBlog, by its own account, now uses AI tools in research, drafting, and editing. That said, plenty of traditional media sources dabble in churnalism, too.</p>
+          </div>
+        </div>
+
+        <div class="qa">
+          <h3 class="subhead">Any tips for a quick check?</h3>
+          <div class="section-body">
+            <p>Absolutely! You can:</p>
+          </div>
+          <ul>
+            <li>Copy and paste a phrase, sentence, or paragraph from the article into a search engine to see how many versions of it exist elsewhere</li>
+            <li>Spot obvious tells like &ldquo;according to a press release&rdquo; or &ldquo;a spokesperson said&rdquo;</li>
+            <li>Clock PR jargon (words like &ldquo;revolutionary,&rdquo; &ldquo;groundbreaking,&rdquo; &ldquo;world-class,&rdquo; etc.)</li>
+            <li>Keep an eye out for ambiguous phrases such as &ldquo;according to research,&rdquo; &ldquo;research published today,&rdquo; and &ldquo;according to a new report&rdquo;</li>
+            <li>Look for phrases or headlines intended to spark an emotional reaction (e.g. &ldquo;increase/decrease risk of,&rdquo; &ldquo;link between,&rdquo; etc.)</li>
+          </ul>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- lyceum:footer -->
+  <footer>
+    <div class="footer-left">
+      <span class="footer-name">West Essex High School Library Lyceum</span>
+    </div>
+    <div class="footer-right">
+      Questions? Reach out to <a href="mailto:sthompson@westex.org">Mr. Thompson</a>.<br>
+      &copy; <span id="yr">2026</span> West Essex High School
+    </div>
+  </footer>
+  <!-- /lyceum:footer -->
+
+  <script src="lyceum.js" defer></script>
+  <script src="sciencenews.js" defer></script>
+</body>
+</html>
