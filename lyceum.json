@@ -1,0 +1,38 @@
+{
+  "lyceum": 1,
+  "title": "News vs. Information vs. Research",
+  "description": "Distinguish news articles, informational websites, and scholarly articles from one another; background information on churnalism in science reporting.",
+  "url": "https://mistertlibrary.github.io/sciencenews/",
+  "series": "",
+  "course": "",
+  "subjects": [
+    "Science"
+  ],
+  "sections": [
+    {
+      "title": "Same Scientific Content, Three Unique Formats!",
+      "anchor": "#kinds-title",
+      "keywords": []
+    },
+    {
+      "title": "Test Your Knowledge!",
+      "anchor": "#activity-title",
+      "keywords": []
+    },
+    {
+      "title": "Science News Sources",
+      "anchor": "#outlets-title",
+      "keywords": []
+    },
+    {
+      "title": "Thompson's Three Cs for Source Evaluation",
+      "anchor": "#threecs-title",
+      "keywords": []
+    },
+    {
+      "title": "A Note on Churnalism",
+      "anchor": "#churnalism-title",
+      "keywords": []
+    }
+  ]
+}

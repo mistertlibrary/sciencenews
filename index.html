@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light" data-size="small" data-font="serif">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,20 +10,18 @@
   <meta property="og:site_name" content="WEHS Library Lyceum">
   <meta property="og:title" content="News vs. Information vs. Research | WEHS Library Lyceum">
   <meta property="og:description" content="Distinguish news articles, informational websites, and scholarly articles from one another; background information on churnalism in science reporting.">
-  <meta property="og:url" content="https://mistertlibrary.github.io/librarylyceum/sciencenews.html">
+  <meta property="og:url" content="https://mistertlibrary.github.io/sciencenews/">
   <meta property="og:image" content="https://mistertlibrary.github.io/librarylyceum/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="News vs. Information vs. Research | WEHS Library Lyceum">
   <meta name="twitter:description" content="Distinguish news articles, informational websites, and scholarly articles from one another; background information on churnalism in science reporting.">
   <meta name="twitter:image" content="https://mistertlibrary.github.io/librarylyceum/og-image.png">
 
-  <!-- lyceum:head -->
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
-  <link rel="apple-touch-icon" href="favicon.png">
+  <link rel="icon" type="image/svg+xml" href="/librarylyceum/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/librarylyceum/favicon.png">
+  <link rel="apple-touch-icon" href="/librarylyceum/favicon.png">
 
   <script>
-    /* Reader preferences, applied before first paint. Keep inline, in the head. */
     (function () {
       try {
         var d = document.documentElement;
@@ -31,8 +29,8 @@
         var s = localStorage.getItem("lyceum-size");
         var f = localStorage.getItem("lyceum-font");
         if (t === "dark" || t === "contrast") d.dataset.theme = t;
-        if (s && s !== "small") d.dataset.size = s;
-        if (f && f !== "serif") d.dataset.font = f;
+        if (s === "medium" || s === "large") d.dataset.size = s;
+        if (f === "sans" || f === "dyslexic") d.dataset.font = f;
         if (f === "dyslexic") {
           var L = document.createElement("link");
           L.id = "lyceum-dyslexic"; L.rel = "stylesheet"; L.href = "/librarylyceum/lyceum-dyslexic.css";
@@ -43,12 +41,326 @@
   </script>
 
   <link rel="stylesheet" href="/librarylyceum/lyceum-fonts.css">
-  <link rel="stylesheet" href="lyceum.css">
-  <!-- /lyceum:head -->
 
   <style>
 
-    /* ── GUIDE PAGE ONLY ── */
+  /* Lyceum design tokens. Kept identical to the hub's so this guide reads as
+     part of the network; vendored rather than linked, because a stylesheet
+     that fails to load does not degrade gracefully. */
+  :root {
+    --red: #B22234;
+    --red-ink: #B22234;
+    --on-red: #FFFFFF;
+    --parchment: #FAF7F2;
+    --cream: #F0EBE0;
+    --charcoal: #1C1C1C;
+    --near-black: #0F0F0F;
+    --gold: #C9A84C;
+    --gold-light: #D4B86A;
+    --gold-ink: #7A5A08;
+    --rule-color: #D4C5A9;
+    --white: #FFFFFF;
+
+    --bg: var(--parchment);
+    --surface: var(--cream);
+    --border: var(--rule-color);
+    --text: var(--charcoal);
+    --text-muted: #555555;
+
+    --serif: "EB Garamond", Georgia, serif;
+    --display: "Cormorant Garamond", Georgia, serif;
+    --sans: "Libre Franklin", system-ui, sans-serif;
+    --body-font: var(--serif);
+    --base-size: 19px;
+
+    --panel-bg: #0F0F0F;
+    --panel-border: #2F2F2F;
+    --panel-label: #8A8A8A;
+    --panel-btn: #A8A8A8;
+  }
+
+  [data-theme="dark"] {
+    --gold-ink: var(--gold);
+    --bg: #141414;
+    --surface: #1E1E1E;
+    --border: #3A3A3A;
+    --text: #EDE8DF;
+    --text-muted: #999999;
+    --rule-color: #3A3A3A;
+    --red-ink: #DE6C78;
+  }
+
+  [data-theme="contrast"] {
+    --parchment:  #000000;
+    --cream:      #000000;
+    --charcoal:   #FFFFFF;
+    --near-black: #000000;
+    --white:      #FFFFFF;
+    --bg:          #000000;
+    --surface:     #000000;
+    --border:      #FFFFFF;
+    --text:        #FFFFFF;
+    --text-muted:  #FFFFFF;
+    --rule-color:  #FFFFFF;
+    --gold:       #FFD400;
+    --gold-ink:   #FFD400;
+    --gold-light: #FFD400;
+    --red:      #FFD400;
+    --red-ink:  #FFD400;
+    --on-red:   #000000;
+    --panel-bg:     #000000;
+    --panel-border: #FFFFFF;
+    --panel-label:  #FFFFFF;
+    --panel-btn:    #FFFFFF;
+  }
+
+  [data-theme="contrast"] .page-header { background-image: none; }
+
+  [data-size="medium"] { --base-size: 21px; }
+  [data-size="large"]  { --base-size: 24px; }
+
+  [data-font="sans"] { --body-font: var(--sans); }
+
+  [data-font="dyslexic"] {
+    --body-font: "OpenDyslexic", Georgia, serif;
+    --display:   "OpenDyslexic", Georgia, serif;
+    --sans:      "OpenDyslexic", system-ui, sans-serif;
+    line-height: 1.9;
+  }
+
+  [data-font="sans"] .section-body p,
+  [data-font="dyslexic"] .section-body p { font-style: normal; }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  [hidden] { display: none !important; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--body-font);
+    background-color: var(--bg);
+    color: var(--text);
+    font-size: var(--base-size);
+    line-height: 1.8;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  a {
+    color: var(--red-ink);
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+
+  a:hover { color: var(--text); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 300;
+    padding: 0.75rem 1.25rem;
+    background-color: var(--charcoal);
+    color: var(--parchment);
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: 2px solid var(--gold);
+  }
+
+  .skip-link:focus { left: 0.5rem; top: 0.5rem; }
+
+  [data-theme="dark"] .skip-link {
+    background-color: var(--parchment);
+    color: var(--charcoal);
+  }
+
+  .topbar {
+    background-color: var(--near-black);
+    color: #BBBBBB;
+    border-bottom: 2px solid var(--gold);
+    font-family: var(--sans);
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 0.7rem 1.2rem;
+    text-align: center;
+  }
+
+  .topbar a { color: var(--gold-light); text-decoration: none; border-bottom: 1px solid currentColor; }
+  .topbar a:hover { color: var(--white); }
+
+  .page-header {
+    text-align: center;
+    padding: 3.5rem 2.5rem 2.5rem;
+    background-color: var(--bg);
+    background-image:
+      linear-gradient(rgba(201,168,76,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.06) 1px, transparent 1px);
+    background-size: 44px 44px;
+    border-bottom: 1px solid var(--border);
+    animation: fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) both;
+    transition: background-color 0.3s;
+  }
+
+  .page-header h1 {
+    font-family: var(--display);
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    overflow-wrap: break-word;
+  }
+
+  .page-rule { width: 56px; height: 2px; background: var(--gold); margin: 1.2rem auto 1.4rem; }
+
+  footer {
+    background-color: var(--near-black);
+    border-top: 2px solid var(--gold);
+    text-align: center;
+    font-family: var(--sans);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    color: #8C8C8C;
+    padding: 2.5rem 1.5rem 5.5rem;
+  }
+
+  footer .big {
+    font-family: var(--display);
+    font-size: 1.3rem;
+    font-style: italic;
+    letter-spacing: 0.03em;
+    color: var(--white);
+    margin-bottom: 0.7rem;
+  }
+
+  footer a { color: var(--gold-light); text-decoration: underline; text-underline-offset: 0.18em; }
+  footer a:hover { color: var(--white); }
+
+  .a11y-toggle {
+    position: fixed;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    z-index: 200;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--panel-bg);
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--gold);
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 1.32rem;
+    line-height: 1;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.28);
+  }
+
+  .a11y-panel {
+    position: fixed;
+    right: 1.5rem;
+    bottom: 5.5rem;
+    z-index: 200;
+    width: 290px;
+    background-color: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-top: 2px solid var(--gold);
+    padding: 1.25rem 1.35rem 1.35rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+    font-family: var(--sans);
+  }
+
+  .a11y-group { border: 0; margin-bottom: 1.1rem; }
+  .a11y-group:last-child { margin-bottom: 0; }
+
+  .a11y-group legend {
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--panel-label);
+    margin-bottom: 0.45rem;
+  }
+
+  .a11y-group .opts { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+  .a11y-group .opts button {
+    flex: 1;
+    min-width: 0;
+    font-family: var(--sans);
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--panel-btn);
+    background: transparent;
+    border: 1px solid #333;
+    padding: 0.4rem 0.35rem;
+    cursor: pointer;
+    line-height: 1.4;
+  }
+
+  .a11y-group .opts button:hover,
+  .a11y-group .opts button[aria-pressed="true"] {
+    color: var(--gold);
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.08);
+  }
+
+  [data-font="dyslexic"] .a11y-group .opts button { letter-spacing: 0.02em; font-size: 0.55rem; }
+
+  a:focus-visible,
+  button:focus-visible,
+  textarea:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+
+  @media print {
+    .a11y-toggle, .a11y-panel, .skip-link { display: none !important; }
+    body { background: #FFFFFF; color: #000000; }
+  }
+
+  @media (max-width: 820px) {
+    footer { padding-bottom: 5.5rem; }
+    .a11y-toggle { right: 1rem; bottom: 1rem; }
+    .a11y-panel { right: 1rem; bottom: 5rem; width: calc(100vw - 2rem); max-width: 280px; }
+  }
+
 
     .page-rule { margin: 1.2rem auto 0; }
 
@@ -648,70 +960,11 @@
   </style>
 </head>
 <body>
-  <!-- lyceum:skiplink target="#main-content" -->
   <a class="skip-link" href="#main-content">Skip to main content</a>
-  <!-- /lyceum:skiplink -->
 
-  <!-- lyceum:a11y -->
-  <button id="a11y-trigger" class="a11y-trigger" type="button"
-          aria-expanded="false" aria-controls="a11y-panel"
-          aria-label="Display and accessibility settings">
-    <span class="a11y-trigger-glyph" aria-hidden="true">Aa</span>
-  </button>
-
-  <div id="a11y-panel" class="a11y-panel" role="group" aria-labelledby="a11y-panel-title" hidden>
-    <p class="a11y-panel-title" id="a11y-panel-title">Display Settings</p>
-
-    <div class="a11y-group">
-      <span class="a11y-label" id="a11y-size-label">Text size</span>
-      <div class="a11y-row" role="group" aria-labelledby="a11y-size-label">
-        <button class="a11y-btn active" type="button" data-size="small" aria-pressed="true">A</button>
-        <button class="a11y-btn" type="button" data-size="medium" aria-pressed="false">A+</button>
-        <button class="a11y-btn" type="button" data-size="large"  aria-pressed="false">A++</button>
-      </div>
-    </div>
-
-    <div class="a11y-group">
-      <span class="a11y-label" id="a11y-font-label">Typeface</span>
-      <div class="a11y-row" role="group" aria-labelledby="a11y-font-label">
-        <button class="a11y-btn active" type="button" data-font="serif" aria-pressed="true">Serif</button>
-        <button class="a11y-btn" type="button" data-font="sans" aria-pressed="false">Sans</button>
-        <button class="a11y-btn" type="button" data-font="dyslexic" aria-pressed="false" aria-label="OpenDyslexic">Dyslexic</button>
-      </div>
-    </div>
-
-    <div class="a11y-group">
-      <span class="a11y-label" id="a11y-theme-label">Theme</span>
-      <div class="a11y-row" role="group" aria-labelledby="a11y-theme-label">
-        <button class="a11y-btn active" type="button" data-theme-choice="light" aria-pressed="true">Light</button>
-        <button class="a11y-btn" type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
-        <button class="a11y-btn" type="button" data-theme-choice="contrast" aria-pressed="false">Contrast</button>
-      </div>
-    </div>
-  </div>
-  <!-- /lyceum:a11y -->
-  <!-- lyceum:header page="guides" -->
-  <header>
-    <a href="index.html" class="header-brand" aria-label="WEHS Library Lyceum home">
-      <div class="header-wordmark">
-        <span class="wordmark-school">West Essex High School</span>
-        <span class="wordmark-name">Library Lyceum</span>
-      </div>
-    </a>
-    <nav aria-label="Main navigation">
-      <a href="index.html">Home</a>
-      <a href="databases.html">Find a Database</a>
-      <a href="guides.html" class="active" aria-current="page">Research Guides</a>
-      <a href="tools.html">Classroom Tools</a>
-      <a href="search.html">Search</a>
-      <a href="newsletter/">Newsletter</a>
-      <a href="about.html">About</a>
-    </nav>
-  </header>
-  <!-- /lyceum:header -->
+  <div class="topbar"><a href="/librarylyceum/guides.html">WEHS Library Lyceum</a> research guides presents...</div>
 
   <main id="main-content">
-
     <div class="page-header">
       <h1>News vs. Information vs. Research</h1>
       <div class="page-rule" aria-hidden="true"></div>
@@ -1058,21 +1311,294 @@
       </section>
 
     </div>
+  
   </main>
 
-  <!-- lyceum:footer -->
   <footer>
-    <div class="footer-left">
-      <span class="footer-name">West Essex High School Library Lyceum</span>
-    </div>
-    <div class="footer-right">
-      Questions? Reach out to <a href="mailto:sthompson@westex.org">Mr. Thompson</a>.<br>
-      &copy; <span id="yr">2026</span> West Essex High School
-    </div>
+    <p class="big">West Essex High School Library Media Center</p>
+    <p><a href="/librarylyceum/">WEHS Library Lyceum</a></p>
   </footer>
-  <!-- /lyceum:footer -->
 
-  <script src="lyceum.js" defer></script>
-  <script src="sciencenews.js" defer></script>
+  <button class="a11y-toggle" type="button" aria-expanded="false" aria-controls="a11y-panel" aria-label="Reading preferences">Aa</button>
+
+  <div class="a11y-panel" id="a11y-panel" role="group" aria-label="Reading preferences" hidden>
+    <fieldset class="a11y-group"><legend>Text size</legend><div class="opts" data-dim="size"><button type="button" data-v="small">Small</button><button type="button" data-v="medium">Medium</button><button type="button" data-v="large">Large</button></div></fieldset>
+    <fieldset class="a11y-group"><legend>Theme</legend><div class="opts" data-dim="theme"><button type="button" data-v="light">Light</button><button type="button" data-v="dark">Dark</button><button type="button" data-v="contrast">High contrast</button></div></fieldset>
+    <fieldset class="a11y-group"><legend>Typeface</legend><div class="opts" data-dim="font"><button type="button" data-v="serif">Serif</button><button type="button" data-v="sans">Sans</button><button type="button" data-v="dyslexic">OpenDyslexic</button></div></fieldset>
+  </div>
+
+  <script>
+(function () {
+  var d = document.documentElement;
+  var K = { size: "lyceum-size", theme: "lyceum-theme", font: "lyceum-font" };
+
+  function dyslexic(on) {
+    var L = document.getElementById("lyceum-dyslexic");
+    if (on && !L) {
+      L = document.createElement("link");
+      L.id = "lyceum-dyslexic";
+      L.rel = "stylesheet";
+      L.href = "/librarylyceum/lyceum-dyslexic.css";
+      document.head.appendChild(L);
+    }
+  }
+
+  function sync() {
+    document.querySelectorAll(".a11y-group .opts").forEach(function (g) {
+      var dim = g.getAttribute("data-dim");
+      g.querySelectorAll("button").forEach(function (b) {
+        b.setAttribute("aria-pressed", String(d.dataset[dim] === b.getAttribute("data-v")));
+      });
+    });
+  }
+
+  document.querySelectorAll(".a11y-group button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var dim = b.parentNode.getAttribute("data-dim");
+      var v = b.getAttribute("data-v");
+      d.dataset[dim] = v;
+      if (dim === "font") dyslexic(v === "dyslexic");
+      try { localStorage.setItem(K[dim], v); } catch (e) {}
+      sync();
+    });
+  });
+
+  var t = document.querySelector(".a11y-toggle");
+  var p = document.getElementById("a11y-panel");
+
+  t.addEventListener("click", function () {
+    p.hidden = !p.hidden;
+    t.setAttribute("aria-expanded", String(!p.hidden));
+    if (!p.hidden) p.querySelector("button").focus();
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !p.hidden) {
+      p.hidden = true;
+      t.setAttribute("aria-expanded", "false");
+      t.focus();
+    }
+  });
+
+  sync();
+})();
+  </script>
+
+  <script>
+(function () {
+  "use strict";
+
+  var activity = document.getElementById("activity");
+  if (!activity) return;
+
+  var SOURCES = [
+    {
+      id: "nyt",
+      type: "news",
+      label: "Brincat, To Get a Man’s Attention, Meow Harder",
+      html: 'Brincat, Clarissa. “To Get a Man’s Attention, Meow Harder.” <cite>The New York Times</cite>, 27 Nov. 2025, <a href="https://www.nytimes.com/2025/11/27/science/cats-meow-men-women.html" target="_blank" rel="noopener">www.nytimes.com/2025/11/27/science/cats-meow-men-women.html<span class="visually-hidden"> (opens in a new tab)</span></a>. Accessed 15 Sept. 2026.'
+    },
+    {
+      id: "cdc",
+      type: "informational",
+      label: "Cats, CDC Healthy Pets, Healthy People",
+      html: '“Cats.” <cite>Healthy Pets, Healthy People</cite>, Centers for Disease Control and Prevention, 15 June 2026, <a href="https://www.cdc.gov/healthy-pets/about/cats.html" target="_blank" rel="noopener">www.cdc.gov/healthy-pets/about/cats.html<span class="visually-hidden"> (opens in a new tab)</span></a>. Accessed 15 Sept. 2026.'
+    },
+    {
+      id: "ethology",
+      type: "scholarly",
+      label: "Demirbaş et al., Greeting Vocalizations in Domestic Cats",
+      html: 'Demirbaş, Yasemin Salgırlı, et al. “Greeting Vocalizations in Domestic Cats Are More Frequent with Male Caregivers.” <cite>Ethology</cite>, vol. 132, no. 2, 2026, pp. 87–94. <a href="https://doi.org/10.1111/eth.70033" target="_blank" rel="noopener">https://doi.org/10.1111/eth.70033<span class="visually-hidden"> (opens in a new tab)</span></a>. Accessed 15 Sept. 2026.'
+    },
+    {
+      id: "moderncat",
+      type: "news",
+      label: "Frosek, Cats Meow More at Male Caregivers",
+      html: 'Frosek, Rose. “Cats Meow More at Male Caregivers—Scientists Think They Know Why.” <cite>Modern Cat</cite>, 10 June 2026, <a href="https://moderncat.com/articles/cats-meow-more-at-male-caregivers-study/" target="_blank" rel="noopener">moderncat.com/articles/cats-meow-more-at-male-caregivers-study/<span class="visually-hidden"> (opens in a new tab)</span></a>. Accessed 15 Sept. 2026.'
+    },
+    {
+      id: "salem",
+      type: "informational",
+      label: "Berman, Felidae",
+      html: 'Berman, Milton. “Felidae.” <cite>Salem Press Encyclopedia of Science</cite>, Mar. 2026. <cite>EBSCOhost</cite>, <a href="https://research.ebsco.com/plink/4c8e2392-43d7-3047-bfc0-1cc72b5153ea" target="_blank" rel="noopener">research.ebsco.com/plink/4c8e2392-43d7-3047-bfc0-1cc72b5153ea<span class="visually-hidden"> (opens in a new tab)</span></a>. Accessed 15 Sept. 2026.'
+    }
+  ];
+
+  var NAMES = { news: "News", informational: "Information", scholarly: "Scholarly", pool: "Citations" };
+
+  var status = document.getElementById("activity-status");
+  var bins = {};
+  var chosen = null;
+
+  Array.prototype.forEach.call(activity.querySelectorAll("[data-bin]"), function (el) {
+    bins[el.dataset.bin] = {
+      wrap: el,
+      list: el.querySelector(".source-list"),
+      empty: el.querySelector(".activity-empty"),
+      place: el.querySelector(".bin-place")
+    };
+  });
+
+  function say(text) { status.textContent = text; }
+
+  function build(src) {
+    var li = document.createElement("li");
+    li.className = "source";
+    li.id = "src-" + src.id;
+    li.draggable = true;
+    li.dataset.type = src.type;
+
+    var p = document.createElement("p");
+    p.innerHTML = src.html;
+    li.appendChild(p);
+
+    var note = document.createElement("span");
+    note.className = "source-note";
+    note.hidden = true;
+    li.appendChild(note);
+
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "source-select";
+    btn.textContent = "Choose";
+    btn.setAttribute("aria-pressed", "false");
+    btn.setAttribute("aria-label", "Choose: " + src.label);
+    btn.addEventListener("click", function () { choose(li); });
+    li.appendChild(btn);
+
+    li.addEventListener("dragstart", function (e) {
+      e.dataTransfer.setData("text/plain", li.id);
+      e.dataTransfer.effectAllowed = "move";
+      li.classList.add("dragging");
+    });
+    li.addEventListener("dragend", function () { li.classList.remove("dragging"); });
+
+    return li;
+  }
+
+  function choose(li) {
+    var already = li.classList.contains("chosen");
+    clearChoice();
+    if (already) {
+      say("Nothing chosen.");
+      return;
+    }
+    chosen = li;
+    li.classList.add("chosen");
+    li.querySelector(".source-select").setAttribute("aria-pressed", "true");
+    Object.keys(bins).forEach(function (key) {
+      bins[key].place.disabled = (key === li.parentNode.parentNode.dataset.bin);
+      bins[key].wrap.classList.toggle("armed", !bins[key].place.disabled);
+    });
+    say("Chosen. Now choose a category.");
+  }
+
+  function clearChoice() {
+    if (chosen) {
+      chosen.classList.remove("chosen");
+      chosen.querySelector(".source-select").setAttribute("aria-pressed", "false");
+    }
+    chosen = null;
+    Object.keys(bins).forEach(function (key) {
+      bins[key].place.disabled = true;
+      bins[key].wrap.classList.remove("armed");
+    });
+  }
+
+  function move(li, key) {
+    li.removeAttribute("data-verdict");
+    var note = li.querySelector(".source-note");
+    note.hidden = true;
+    note.textContent = "";
+    bins[key].list.appendChild(li);
+    refresh();
+  }
+
+  function refresh() {
+    Object.keys(bins).forEach(function (key) {
+      var count = bins[key].list.children.length;
+      bins[key].empty.hidden = count > 0;
+    });
+  }
+
+  Object.keys(bins).forEach(function (key) {
+    var bin = bins[key];
+
+    bin.place.addEventListener("click", function () {
+      if (!chosen) return;
+      var li = chosen;
+      clearChoice();
+      move(li, key);
+      say("Moved to " + NAMES[key] + ".");
+      li.querySelector(".source-select").focus();
+    });
+
+    bin.wrap.addEventListener("dragover", function (e) {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = "move";
+      bin.wrap.classList.add("over");
+    });
+
+    bin.wrap.addEventListener("dragleave", function () { bin.wrap.classList.remove("over"); });
+
+    bin.wrap.addEventListener("drop", function (e) {
+      e.preventDefault();
+      bin.wrap.classList.remove("over");
+      var id = e.dataTransfer.getData("text/plain");
+      var li = id && document.getElementById(id);
+      if (!li) return;
+      clearChoice();
+      move(li, key);
+      say("Moved to " + NAMES[key] + ".");
+    });
+  });
+
+  document.getElementById("check-answers").addEventListener("click", function () {
+    var right = 0, placed = 0;
+
+    Object.keys(bins).forEach(function (key) {
+      Array.prototype.forEach.call(bins[key].list.children, function (li) {
+        var note = li.querySelector(".source-note");
+        if (key === "pool") {
+          li.removeAttribute("data-verdict");
+          note.hidden = true;
+          return;
+        }
+        placed++;
+        note.hidden = false;
+        if (li.dataset.type === key) {
+          right++;
+          li.dataset.verdict = "right";
+          note.textContent = "Correct";
+        } else {
+          li.dataset.verdict = "wrong";
+          note.textContent = "Try another category";
+        }
+      });
+    });
+
+    if (placed === 0) {
+      say("Nothing placed yet. Choose a citation, then choose a category.");
+    } else if (right === SOURCES.length) {
+      say("You did it! You correctly identified all sources! (I hope) you’re ready to find news articles for your assignment!");
+    } else {
+      say(right + " of " + placed + " placed correctly. For each citation marked “Try another category,” ask what it was written to do: report a recent event, brief you on a subject, or present original research. The byline, the date and the publication name help, but might mislead you." +
+        (placed < SOURCES.length ? " " + (SOURCES.length - placed) + " still unplaced." : ""));
+    }
+  });
+
+  document.getElementById("reset-activity").addEventListener("click", function () {
+    clearChoice();
+    SOURCES.forEach(function (src) {
+      var li = document.getElementById("src-" + src.id);
+      move(li, "pool");
+    });
+    say("Cleared. All five citations are back in the list.");
+  });
+
+  SOURCES.forEach(function (src) { bins.pool.list.appendChild(build(src)); });
+  refresh();
+})();
+  </script>
 </body>
 </html>
