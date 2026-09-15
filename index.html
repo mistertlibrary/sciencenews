@@ -48,24 +48,28 @@
      part of the network; vendored rather than linked, because a stylesheet
      that fails to load does not degrade gracefully. */
   :root {
-    --red: #B22234;
-    --red-ink: #B22234;
+    --red: #A32B1E;
+    --red-ink: #8F2418;
     --on-red: #FFFFFF;
-    --parchment: #FAF7F2;
-    --cream: #F0EBE0;
-    --charcoal: #1C1C1C;
-    --near-black: #0F0F0F;
+    --parchment: #F1F0EC;
+    --cream: #FFFFFF;
+    --charcoal: #16181C;
+    --near-black: #0E1013;
     --gold: #C9A84C;
     --gold-light: #D4B86A;
     --gold-ink: #7A5A08;
-    --rule-color: #D4C5A9;
+    --rule-color: #CBCCC7;
     --white: #FFFFFF;
+
+    --news:  #1B4F72;
+    --info:  #8A5A00;
+    --schol: #2F6B4F;
 
     --bg: var(--parchment);
     --surface: var(--cream);
     --border: var(--rule-color);
     --text: var(--charcoal);
-    --text-muted: #555555;
+    --text-muted: #4F5661;
 
     --serif: "EB Garamond", Georgia, serif;
     --display: "Cormorant Garamond", Georgia, serif;
@@ -81,13 +85,17 @@
 
   [data-theme="dark"] {
     --gold-ink: var(--gold);
-    --bg: #141414;
-    --surface: #1E1E1E;
-    --border: #3A3A3A;
-    --text: #EDE8DF;
-    --text-muted: #999999;
-    --rule-color: #3A3A3A;
-    --red-ink: #DE6C78;
+    --bg: #14161A;
+    --surface: #1C1F24;
+    --border: #343941;
+    --text: #E8E6E1;
+    --text-muted: #A3A9B2;
+    --rule-color: #343941;
+    --red-ink: #E2887A;
+
+    --news:  #7FB3D5;
+    --info:  #D9A441;
+    --schol: #7FC79E;
   }
 
   [data-theme="contrast"] {
@@ -108,6 +116,9 @@
     --red:      #FFD400;
     --red-ink:  #FFD400;
     --on-red:   #000000;
+    --news:     #FFD400;
+    --info:     #FFD400;
+    --schol:    #FFD400;
     --panel-bg:     #000000;
     --panel-border: #FFFFFF;
     --panel-label:  #FFFFFF;
@@ -957,6 +968,117 @@
       .three-c-body { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
       .headline-db { padding: 1.6rem 1.25rem; }
     }
+    /* ── TYPE COLOUR ──────────────────────────────────────────
+       The three kinds of source carry three accents, and the same accent
+       marks the card, the drop zone and nothing else. Colour means the
+       category here; the verdict marks use their own tokens so a reader
+       is never asked to tell right from wrong by hue. */
+
+    .kind[data-kind="news"],          .bin[data-bin="news"]          { --type: var(--news); }
+    .kind[data-kind="informational"], .bin[data-bin="informational"] { --type: var(--info); }
+    .kind[data-kind="scholarly"],     .bin[data-bin="scholarly"]     { --type: var(--schol); }
+    .bin[data-bin="pool"] { --type: var(--gold-ink); }
+
+    .kind { border-top: 3px solid var(--type); }
+    .kind h3 { color: var(--type); border-bottom-color: var(--type); }
+    .kind li::before { background: var(--type); }
+    .kind-label { color: var(--type); }
+
+    .bin h3 { color: var(--type); }
+    .bin.armed, .bin.over { border-color: var(--type); }
+    .bin-place:hover { border-color: var(--type); color: var(--type); }
+
+    /* ── A WIDER BOARD ──────────────────────────────────────── */
+
+    .activity-wide {
+      width: min(1180px, calc(100vw - 2.5rem));
+      margin-left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .activity-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .activity-grid .bins { grid-template-columns: minmax(0, 1fr); margin-top: 0; gap: 1rem; }
+
+    .activity-col > .pool-label { margin-top: 0; }
+
+    @media (max-width: 900px) {
+      .activity-wide { width: auto; margin-left: 0; transform: none; }
+      .activity-grid { grid-template-columns: minmax(0, 1fr); gap: 1.4rem; }
+    }
+
+    /* ── MOTION ─────────────────────────────────────────────── */
+
+    .source { transition: border-color 0.2s, background-color 0.2s, transform 0.18s, box-shadow 0.18s; }
+    .source.chosen { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.12); }
+
+    @keyframes landed {
+      0%   { transform: translateY(-10px) scale(0.985); opacity: 0.4; }
+      60%  { transform: translateY(2px)   scale(1.004); opacity: 1; }
+      100% { transform: none;                           opacity: 1; }
+    }
+
+    .source.landed { animation: landed 0.32s cubic-bezier(0.22,1,0.36,1) both; }
+
+    @keyframes nudge {
+      0%, 100% { transform: none; }
+      20% { transform: translateX(-4px); }
+      50% { transform: translateX(4px); }
+      80% { transform: translateX(-2px); }
+    }
+
+    .source.wrong-shake { animation: nudge 0.32s ease both; }
+
+    @keyframes markIn {
+      from { opacity: 0; transform: translateY(-3px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    .source-note { animation: markIn 0.25s ease both; }
+
+    @keyframes armed {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(0,0,0,0); }
+      50%      { box-shadow: 0 0 0 3px color-mix(in srgb, var(--type) 26%, transparent); }
+    }
+
+    .bin.armed { animation: armed 1.5s ease-in-out infinite; }
+
+    /* ── WORKSHEET EXPORT ───────────────────────────────────── */
+
+    .worksheet-actions {
+      display: flex;
+      gap: 0.8rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 1.8rem;
+    }
+
+    .worksheet-status {
+      font-family: var(--sans);
+      font-size: 0.66rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 0.9rem;
+      min-height: 1.4em;
+    }
+
+    /* Printing the worksheet alone: everything else steps out of the way. */
+    body.print-worksheet > *:not(main),
+    body.print-worksheet .guide-section:not(.worksheet-section),
+    body.print-worksheet .section-divider,
+    body.print-worksheet .page-header,
+    body.print-worksheet .worksheet-actions,
+    body.print-worksheet .worksheet-status { display: none !important; }
+
+    body.print-worksheet .guide-body { padding: 0; }
+
   </style>
 </head>
 <body>
@@ -983,7 +1105,7 @@
         </div>
 
         <div class="kinds">
-          <div class="kind">
+          <div class="kind" data-kind="news">
             <h3>News Article</h3>
             <p><strong>What it is:</strong> Reporting on recent events written by journalists for the general public</p>
             <span class="kind-label">Look for:</span>
@@ -996,7 +1118,7 @@
             </ul>
           </div>
 
-          <div class="kind">
+          <div class="kind" data-kind="informational">
             <h3>Informational Website</h3>
             <p><strong>What it is:</strong> Background information, guide, fact sheet, or advocacy content</p>
             <span class="kind-label">Look for:</span>
@@ -1008,10 +1130,10 @@
               <li>General background info</li>
               <li>Reference works belong here, too. An encyclopedia entry may contain an author, a date, and a publisher, but it still qualifies as background information. The source is intended as an introduction to basic information, not analysis or particulars about an event.</li>
             </ul>
-            <p class="kind-example"><span class="kind-example-label">Example</span> <a href="https://plato.stanford.edu/" target="_blank" rel="noopener"><cite>Stanford Encyclopedia of Philosophy</cite><svg class="ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4L10 14M18 14v6H4V6h6"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p>
+            <p class="kind-example"><span class="kind-example-label">Example</span> <a href="https://www.britannica.com/browse/Science" target="_blank" rel="noopener"><cite>Encyclopaedia Britannica</cite><svg class="ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4L10 14M18 14v6H4V6h6"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p>
           </div>
 
-          <div class="kind">
+          <div class="kind" data-kind="scholarly">
             <h3>Scholarly Article</h3>
             <p><strong>What it is:</strong> Peer-reviewed research published in academic journals</p>
             <span class="kind-label">Look for:</span>
@@ -1051,7 +1173,10 @@
           <p style="font-size:calc(var(--base-size) * 0.88);">Choose a citation, then choose a category. You can also drag the cards.</p>
         </div>
 
-        <div class="activity" id="activity">
+        <div class="activity activity-wide" id="activity">
+
+          <div class="activity-grid">
+            <div class="activity-col">
 
           <p class="pool-label" id="pool-label">Citations</p>
           <div class="bin" data-bin="pool">
@@ -1059,6 +1184,9 @@
             <ul class="source-list" id="pool" aria-labelledby="pool-label"></ul>
             <p class="activity-empty">You have placed all five citations</p>
           </div>
+
+            </div>
+            <div class="activity-col">
 
           <div class="bins">
             <div class="bin" data-bin="news">
@@ -1083,9 +1211,13 @@
             </div>
           </div>
 
+            </div>
+          </div>
+
           <div class="activity-actions">
             <button class="activity-btn" type="button" id="check-answers">Check my answers</button>
             <button class="activity-btn" type="button" id="reset-activity">Start over</button>
+            <button class="activity-btn" type="button" id="sound-toggle" aria-pressed="false">Sound off</button>
           </div>
 
           <p class="activity-status" id="activity-status" role="status" aria-live="polite"></p>
@@ -1171,7 +1303,7 @@
 
       <div class="section-divider" aria-hidden="true"></div>
 
-      <section class="guide-section" aria-labelledby="threecs-title">
+      <section class="guide-section worksheet-section" aria-labelledby="threecs-title">
         <h2 class="section-title" id="threecs-title">Thompson&rsquo;s Three Cs for Source Evaluation</h2>
         <div class="section-rule" aria-hidden="true"></div>
 
@@ -1218,6 +1350,14 @@
               </div>
             </div>
           </div>
+
+          <div class="worksheet-actions">
+            <button class="activity-btn" type="button" id="ws-print">Print</button>
+            <button class="activity-btn" type="button" id="ws-download">Download</button>
+            <button class="activity-btn" type="button" id="ws-copy">Copy</button>
+          </div>
+          <p class="worksheet-status" id="ws-status" role="status" aria-live="polite"></p>
+          <textarea id="ws-fallback" class="visually-hidden" readonly aria-hidden="true" tabindex="-1"></textarea>
 
         </div>
       </section>
@@ -1385,6 +1525,56 @@
   </script>
 
   <script>
+    /* Synthesised, so the guide still carries no external file. Off until a
+       reader asks for it: a class of thirty should not chime at once. */
+    (function () {
+      var KEY = "sciencenews-sound";
+      var ctx = null;
+      var on = false;
+      try { on = localStorage.getItem(KEY) === "on"; } catch (e) {}
+
+      function tone(freq, start, dur, peak, type) {
+        var o = ctx.createOscillator(), g = ctx.createGain();
+        o.type = type || "sine";
+        o.frequency.setValueAtTime(freq, ctx.currentTime + start);
+        g.gain.setValueAtTime(0.0001, ctx.currentTime + start);
+        g.gain.exponentialRampToValueAtTime(peak, ctx.currentTime + start + 0.012);
+        g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + start + dur);
+        o.connect(g); g.connect(ctx.destination);
+        o.start(ctx.currentTime + start);
+        o.stop(ctx.currentTime + start + dur + 0.02);
+      }
+
+      var VOICES = {
+        select:  function () { tone(523.25, 0, 0.07, 0.05, "triangle"); },
+        place:   function () { tone(392.00, 0, 0.10, 0.07, "sine"); tone(261.63, 0.04, 0.12, 0.05, "sine"); },
+        right:   function () { tone(659.25, 0, 0.10, 0.06); tone(987.77, 0.09, 0.16, 0.05); },
+        wrong:   function () { tone(155.56, 0, 0.18, 0.06, "sawtooth"); },
+        perfect: function () { [523.25, 659.25, 783.99, 1046.50].forEach(function (f, i) { tone(f, i * 0.09, 0.22, 0.05); }); },
+        clear:   function () { tone(440, 0, 0.08, 0.04, "triangle"); tone(330, 0.06, 0.10, 0.04, "triangle"); }
+      };
+
+      window.SFX = {
+        play: function (name) {
+          if (!on || !VOICES[name]) return;
+          try {
+            if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
+            if (ctx.state === "suspended") ctx.resume();
+            VOICES[name]();
+          } catch (e) {}
+        },
+        isOn: function () { return on; },
+        toggle: function () {
+          on = !on;
+          try { localStorage.setItem(KEY, on ? "on" : "off"); } catch (e) {}
+          if (on) this.play("select");
+          return on;
+        }
+      };
+    })();
+  </script>
+
+  <script>
 (function () {
   "use strict";
 
@@ -1485,6 +1675,7 @@
     }
     chosen = li;
     li.classList.add("chosen");
+    if (window.SFX) SFX.play("select");
     li.querySelector(".source-select").setAttribute("aria-pressed", "true");
     Object.keys(bins).forEach(function (key) {
       bins[key].place.disabled = (key === li.parentNode.parentNode.dataset.bin);
@@ -1511,6 +1702,9 @@
     note.hidden = true;
     note.textContent = "";
     bins[key].list.appendChild(li);
+    li.classList.remove("landed");
+    void li.offsetWidth;
+    li.classList.add("landed");
     refresh();
   }
 
@@ -1530,6 +1724,7 @@
       clearChoice();
       move(li, key);
       say("Moved to " + NAMES[key] + ".");
+      if (window.SFX) SFX.play("place");
       li.querySelector(".source-select").focus();
     });
 
@@ -1550,6 +1745,7 @@
       clearChoice();
       move(li, key);
       say("Moved to " + NAMES[key] + ".");
+      if (window.SFX) SFX.play("place");
     });
   });
 
@@ -1573,9 +1769,14 @@
         } else {
           li.dataset.verdict = "wrong";
           note.textContent = "Try another category";
+          li.classList.remove("wrong-shake");
+          void li.offsetWidth;
+          li.classList.add("wrong-shake");
         }
       });
     });
+
+    if (window.SFX) SFX.play(placed && right === SOURCES.length ? "perfect" : placed ? (right ? "right" : "wrong") : "select");
 
     if (placed === 0) {
       say("Nothing placed yet. Choose a citation, then choose a category.");
@@ -1594,11 +1795,102 @@
       move(li, "pool");
     });
     say("Cleared. All five citations are back in the list.");
+    if (window.SFX) SFX.play("clear");
   });
 
   SOURCES.forEach(function (src) { bins.pool.list.appendChild(build(src)); });
   refresh();
 })();
   </script>
+  <script>
+    (function () {
+      var btn = document.getElementById("sound-toggle");
+      function label() {
+        var on = window.SFX && SFX.isOn();
+        btn.textContent = on ? "Sound on" : "Sound off";
+        btn.setAttribute("aria-pressed", String(!!on));
+      }
+      btn.addEventListener("click", function () { if (window.SFX) SFX.toggle(); label(); });
+      label();
+    })();
+  </script>
+
+  <script>
+    (function () {
+      var status = document.getElementById("ws-status");
+      var fallback = document.getElementById("ws-fallback");
+
+      function sheet() {
+        var lines = ["Three Cs for Evaluating Sources", new Date().toLocaleString(), ""];
+        document.querySelectorAll(".three-c").forEach(function (row) {
+          var name = row.querySelector("h3").textContent.trim();
+          var qs = row.querySelector(".c-questions").textContent.trim();
+          var notes = row.querySelector("textarea").value.trim();
+          lines.push(name.toUpperCase(), qs, "", "NOTES: " + (notes || "(blank)"), "");
+        });
+        return lines.join("\n");
+      }
+
+      function say(msg) {
+        status.textContent = msg;
+        setTimeout(function () { if (status.textContent === msg) status.textContent = ""; }, 4000);
+      }
+
+      document.getElementById("ws-print").addEventListener("click", function () {
+        document.body.classList.add("print-worksheet");
+        function done() {
+          document.body.classList.remove("print-worksheet");
+          window.removeEventListener("afterprint", done);
+        }
+        window.addEventListener("afterprint", done);
+        window.print();
+        setTimeout(done, 1000);
+      });
+
+      document.getElementById("ws-download").addEventListener("click", function () {
+        var d = new Date();
+        var stamp = d.getFullYear() + "-" +
+          String(d.getMonth() + 1).padStart(2, "0") + "-" +
+          String(d.getDate()).padStart(2, "0");
+        var blob = new Blob([sheet()], { type: "text/plain;charset=utf-8" });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        a.href = url;
+        a.download = "three-cs-" + stamp + ".txt";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+        say("Saved to your downloads.");
+      });
+
+      document.getElementById("ws-copy").addEventListener("click", function () {
+        var text = sheet();
+        fallback.value = text;
+        fallback.classList.remove("visually-hidden");
+        fallback.removeAttribute("aria-hidden");
+        fallback.focus();
+        fallback.select();
+        var ok = false;
+        try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+        if (ok) {
+          fallback.classList.add("visually-hidden");
+          fallback.setAttribute("aria-hidden", "true");
+          say("Copied.");
+          return;
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () {
+            fallback.classList.add("visually-hidden");
+            fallback.setAttribute("aria-hidden", "true");
+            say("Copied.");
+          }).catch(function () { say("Press Ctrl+C to copy the selected text."); });
+        } else {
+          say("Press Ctrl+C to copy the selected text.");
+        }
+      });
+    })();
+  </script>
+
 </body>
 </html>
