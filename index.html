@@ -1079,12 +1079,173 @@
 
     body.print-worksheet .guide-body { padding: 0; }
 
+    /* ── SECTION INDEX ──────────────────────────────────────── */
+
+    .guidenav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background-color: var(--surface);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+    }
+
+    .guidenav ol {
+      list-style: none;
+      display: flex;
+      gap: 0.3rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 0 auto;
+      padding: 0.6rem 1rem;
+      max-width: 1180px;
+    }
+
+    .guidenav a {
+      display: block;
+      font-family: var(--sans);
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.35rem 0.8rem;
+      border: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .guidenav a:hover { color: var(--text); border-color: var(--border); }
+
+    .guidenav a.here {
+      color: var(--text);
+      border-color: var(--gold);
+    }
+
+    .section-title { scroll-margin-top: 4.2rem; }
+
+    @media (max-width: 640px) {
+      .guidenav ol { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; }
+      .guidenav a { white-space: nowrap; }
+    }
+
+    /* ── OUTLETS AS CARDS ───────────────────────────────────── */
+
+    .outlets {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+      gap: 1px;
+      background-color: var(--border);
+      margin-top: 2.2rem;
+      border: 1px solid var(--border);
+    }
+
+    .outlet {
+      background-color: var(--surface);
+      border: 0;
+      padding: 1.3rem 1.4rem;
+    }
+
+    .outlet:first-child { border-top: 0; }
+
+    .outlet-name { margin-bottom: 0.5rem; }
+
+    .outlet p { font-size: calc(var(--base-size) * 0.86); line-height: 1.7; }
+
+    /* ── CHURNALISM AS DISCLOSURE CARDS ─────────────────────── */
+
+    .qa-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+      align-items: start;
+      margin-top: 2.2rem;
+    }
+
+    .qa {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0;
+      margin: 0;
+    }
+
+    .qa > summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 1.1rem 1.3rem;
+      display: flex;
+      align-items: baseline;
+      gap: 0.7rem;
+    }
+
+    .qa > summary::-webkit-details-marker { display: none; }
+
+    .qa > summary::after {
+      content: "";
+      flex: none;
+      width: 0.55rem;
+      height: 0.55rem;
+      margin-left: auto;
+      border-right: 2px solid var(--gold-ink);
+      border-bottom: 2px solid var(--gold-ink);
+      transform: rotate(45deg) translateY(-0.15rem);
+      transition: transform 0.2s;
+    }
+
+    .qa[open] > summary::after { transform: rotate(-135deg) translateY(-0.15rem); }
+
+    .qa > summary .subhead {
+      margin: 0;
+      text-align: left;
+      font-size: calc(var(--base-size) * 1.05);
+    }
+
+    .qa > summary:hover .subhead { color: var(--gold-ink); }
+
+    .qa > .section-body,
+    .qa > ul { padding: 0 1.3rem; }
+
+    .qa > .section-body p { text-align: left; }
+
+    .qa > ul { margin: 0 0 1.3rem; padding-bottom: 0.2rem; }
+
+    .qa > .section-body:last-child { padding-bottom: 1.3rem; }
+
+    .qa li { text-align: left; }
+
+    /* ── THREE CS AS CARDS ──────────────────────────────────── */
+
+    .three-c {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--gold);
+      padding: 1.5rem 1.6rem 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .three-c:last-of-type { border-bottom: 1px solid var(--border); }
+
+    @media print {
+      .guidenav { display: none !important; }
+      .qa > summary::after { display: none; }
+    }
+
   </style>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <div class="topbar"><a href="/librarylyceum/guides.html">WEHS Library Lyceum</a> research guides presents...</div>
+
+  <nav class="guidenav" aria-label="Sections">
+    <ol>
+      <li><a href="#kinds-title">Three Formats</a></li>
+      <li><a href="#activity-title">Practice</a></li>
+      <li><a href="#outlets-title">Sources</a></li>
+      <li><a href="#threecs-title">Three Cs</a></li>
+      <li><a href="#churnalism-title">Churnalism</a></li>
+    </ol>
+  </nav>
 
   <main id="main-content">
     <div class="page-header">
@@ -1368,17 +1529,18 @@
         <h2 class="section-title" id="churnalism-title">A Note on Churnalism</h2>
         <div class="section-rule" aria-hidden="true"></div>
 
-        <div class="qa">
-          <h3 class="subhead" style="margin-top:0;">What is churnalism?</h3>
+        <div class="qa-grid">
+          <details class="qa">
+          <summary><h3 class="subhead">What is churnalism?</h3></summary>
           <div class="section-body">
             <p><strong>Churnalism</strong> describes a variety of newswriting in which journalists, staffers, or untrained amateurs repackage third-party materials, such as press releases and wire statements, as news articles.</p>
             <p>It&rsquo;s also referred to as &ldquo;copy-and-paste journalism.&rdquo;</p>
             <p><strong>Churnalism is especially common in scientific reporting.</strong></p>
           </div>
-        </div>
+        </details>
 
-        <div class="qa">
-          <h3 class="subhead">Why is that a problem?</h3>
+        <details class="qa">
+          <summary><h3 class="subhead">Why is that a problem?</h3></summary>
           <div class="section-body">
             <p>These articles&hellip;</p>
           </div>
@@ -1389,10 +1551,10 @@
             <li>&hellip;tend to lack citations and attributions.</li>
             <li>&hellip;do not incorporate additional research, such as the opinions of other experts or information about current scientific consensus on a subject.</li>
           </ul>
-        </div>
+        </details>
 
-        <div class="qa">
-          <h3 class="subhead">Why does churnalism abound?</h3>
+        <details class="qa">
+          <summary><h3 class="subhead">Why does churnalism abound?</h3></summary>
           <div class="section-body">
             <p>Good question! Reasons vary:</p>
           </div>
@@ -1403,17 +1565,17 @@
             <li>Individual persons or small groups of people with a passion for a given subject can and do create websites, social media accounts, newsletters, and other forms of media.</li>
             <li>&ldquo;Entrepreneurs&rdquo; attempt to generate revenue through automated processes, search engine optimization, and social media engagement. &ldquo;Scientific&rdquo; content making bold claims beneath flashy headlines farms engagement.</li>
           </ul>
-        </div>
+        </details>
 
-        <div class="qa">
-          <h3 class="subhead">Is churnalism necessarily a bad thing?</h3>
+        <details class="qa">
+          <summary><h3 class="subhead">Is churnalism necessarily a bad thing?</h3></summary>
           <div class="section-body">
             <p>It doesn&rsquo;t have to be! Churnalist articles can be informative and illuminating. That said, it&rsquo;s bad practice to uncritically accept any information, much less scientific knowledge.</p>
           </div>
-        </div>
+        </details>
 
-        <div class="qa">
-          <h3 class="subhead">How can I identify churnalism?</h3>
+        <details class="qa">
+          <summary><h3 class="subhead">How can I identify churnalism?</h3></summary>
           <div class="section-body">
             <p>Tell-tale signs of churnalism include:</p>
           </div>
@@ -1426,17 +1588,17 @@
             <li>One-sided perspective (e.g. only speaking with the authors of a study)</li>
             <li>Excessive quotations (large portions of the article are in quotes)</li>
           </ul>
-        </div>
+        </details>
 
-        <div class="qa">
-          <h3 class="subhead">Is it more common in certain places?</h3>
+        <details class="qa">
+          <summary><h3 class="subhead">Is it more common in certain places?</h3></summary>
           <div class="section-body">
             <p>Often, yes! Sites like <a href="https://www.sciencedaily.com" target="_blank" rel="noopener">ScienceDaily</a> and <a href="https://scienceblog.com" target="_blank" rel="noopener">ScienceBlog</a> are almost entirely churnalism. ScienceBlog, by its own account, now uses AI tools in research, drafting, and editing. That said, plenty of traditional media sources dabble in churnalism, too.</p>
           </div>
-        </div>
+        </details>
 
-        <div class="qa">
-          <h3 class="subhead">Any tips for a quick check?</h3>
+        <details class="qa">
+          <summary><h3 class="subhead">Any tips for a quick check?</h3></summary>
           <div class="section-body">
             <p>Absolutely! You can:</p>
           </div>
@@ -1447,6 +1609,7 @@
             <li>Keep an eye out for ambiguous phrases such as &ldquo;according to research,&rdquo; &ldquo;research published today,&rdquo; and &ldquo;according to a new report&rdquo;</li>
             <li>Look for phrases or headlines intended to spark an emotional reaction (e.g. &ldquo;increase/decrease risk of,&rdquo; &ldquo;link between,&rdquo; etc.)</li>
           </ul>
+        </details>
         </div>
       </section>
 
@@ -1888,6 +2051,67 @@
         } else {
           say("Press Ctrl+C to copy the selected text.");
         }
+      });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      /* The index marks where the reader is, and opens a closed question if
+         the link they followed points inside one. */
+      var links = Array.prototype.slice.call(document.querySelectorAll(".guidenav a"));
+      var targets = links.map(function (a) { return document.querySelector(a.getAttribute("href")); });
+
+      /* Last heading above the line wins. An intersection ratio test left
+         the final section unhighlighted, because the bottom of the document
+         cannot scroll far enough to satisfy it. */
+      function mark() {
+        var line = 90;
+        var current = 0;
+        targets.forEach(function (t, i) {
+          if (t && t.getBoundingClientRect().top <= line) current = i;
+        });
+        /* The last section is short enough that the page runs out of scroll
+           before its heading reaches the line, so the foot of the document
+           counts as being in it. */
+        if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
+          current = links.length - 1;
+        }
+        links.forEach(function (a, i) { a.classList.toggle("here", i === current); });
+      }
+
+      var ticking = false;
+      function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () { mark(); ticking = false; });
+      }
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", onScroll);
+      mark();
+
+      document.addEventListener("click", function (e) {
+        var a = e.target.closest ? e.target.closest('a[href^="#"]') : null;
+        if (!a) return;
+        var t = document.querySelector(a.getAttribute("href"));
+        if (!t) return;
+        var d = t.closest("details");
+        if (d && !d.open) d.open = true;
+      });
+
+      /* Printing should not lose what a disclosure is hiding. */
+      var reopened = [];
+      window.addEventListener("beforeprint", function () {
+        reopened = [];
+        document.querySelectorAll("details:not([open])").forEach(function (d) {
+          d.open = true;
+          reopened.push(d);
+        });
+      });
+      window.addEventListener("afterprint", function () {
+        reopened.forEach(function (d) { d.open = false; });
+        reopened = [];
       });
     })();
   </script>
